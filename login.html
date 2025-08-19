@@ -13,17 +13,72 @@
     body {
       background-color: rgb(248, 249, 250);
     }
+
+    .custom-input {
+    background-color: #F09100; 
+    border: none;
+    border-radius: 10px;
+    padding: 12px;
+    text-align: center;
+    color: #333;
+    width: 50%;
+    display: block;
+    margin: 0 auto;
+    box-shadow: 0px 3px 6px rgba(0,0,0,0.3);
+  }
+  
+  .btn-custom {
+    background-color: #F09100;
+    color: white;
+    border: none;
+    border-radius: 40px;
+    box-shadow: 0px 2px 3px rgba(0,0,0,0.3);
+    padding: 10px 30px;
+  }
+
+   .btn-custom:hover {
+    background-color: #e6b800;
+  }
   </style>
 </head>
 
 <body>
-  <main class="mt-5">
-    <div class="container">
-      <div class="alert alert-danger text-center" role="alert">
-        <h4 class="alert-heading">Funcionalidad en desarrollo</h4>
+
+  <main style="background-color: #f7f7f7;">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-12 col-md-6 col-lg-4">
+        <div class="bg-white p-5 rounded shadow mt-5">
+
+          
+          <div class="text-center mb-4">
+            <img src="img/login.png" alt="Logo eMercado" style="width: 250px; max-width: 100%;">
+          </div>
+
+          
+          <div class="mb-3 text-center">
+          <label for="usuario" class="form-label fw-bold">Usuario</label>
+          <input type="text" id="usuario" class="form-control custom-input mx-auto d-block" 
+          style="width: 75%;">
+        </div>
+
+          <div class="mb-3 text-center">
+          <label for="contrasena" class="form-label fw-bold">Contraseña</label>
+          <input type="password" id="contrasena" class="form-control custom-input mx-auto d-block" 
+          style="width: 75%;">
+        </div>
+
+        <button class="btn btn-custom d-block mx-auto" onclick="login()" style="padding: 0px 10px;">Ingresar</button>
+
+
+        </div>
       </div>
     </div>
-  </main>
+  </div>
+</main>
+
+
+
   <footer class="text-muted">
     <div class="container">
       <p class="float-end">
@@ -33,6 +88,7 @@
     </div>
   </footer>
   <script src="js/login.js"></script>
+
 </body>
 
 </html>
