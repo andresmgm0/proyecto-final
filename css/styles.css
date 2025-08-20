@@ -1,37 +1,36 @@
 /* estilos aplicados por el grupo al login.html **/
 
-    body {
-      background-color: rgb(248, 249, 250);
-    }
+body {
+  background-color: rgb(248, 249, 250);
+}
 
-    .custom-input {
-    background-color: #F09100; 
-    border: none;
-    border-radius: 10px;
-    padding: 12px;
-    text-align: center;
-    color: #333;
-    width: 50%;
-    display: block;
-    margin: 0 auto;
-    box-shadow: 0px 3px 6px rgba(0,0,0,0.3);
-  }
-  
-  .btn-custom {
-    background-color: #F09100;
-    color: white;
-    border: none;
-    border-radius: 40px;
-    box-shadow: 0px 2px 3px rgba(0,0,0,0.3);
-    padding: 10px 30px;
-  }
+.custom-input {
+background-color: #F09100; 
+border: none;
+border-radius: 10px;
+padding: 12px;
+text-align: center;
+color: #333;
+width: 50%;
+display: block;
+margin: 0 auto;
+box-shadow: 0px 3px 6px rgba(0,0,0,0.3);
+}
 
-   .btn-custom:hover {
-    background-color: #e6b800;
-  }
-  
+.btn-custom {
+background-color: #F09100;
+color: white;
+border: none;
+border-radius: 40px;
+box-shadow: 0px 2px 3px rgba(0,0,0,0.3);
+padding: 10px 30px;
+}
 
+.btn-custom:hover {
+background-color: #e6b800;
+}
 
+/* estilos aplicados por el grupo al login.html **/
 
 .jumbotron,
 .card-body,

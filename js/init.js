@@ -38,4 +38,11 @@ let getJSONData = function(url){
         hideSpinner();
         return result;
     });
-}
+};
+
+document.addEventListener("DOMContentLoaded", function(){
+    let logged = sessionStorage.getItem("logged");
+    if(!logged){
+      window.location.href = "login.html";
+    }
+});
