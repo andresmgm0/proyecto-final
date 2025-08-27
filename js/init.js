@@ -45,4 +45,7 @@ document.addEventListener("DOMContentLoaded", function(){
     if(!logged){
       window.location.href = "login.html";
     }
+    else{
+      document.getElementById("user-nav").textContent = logged;
+    }
 });
