@@ -1,10 +1,11 @@
-function login(){
-    const usuer = document.getElementById("usuario").value.trim();
+function login() {
+    const user = document.getElementById("usuario").value.trim();
     const pass = document.getElementById("contrasena").value.trim();
-    if(usuer != "" && pass != ""){
-        sessionStorage.setItem("logged", true);
+
+    if (user !== "" && pass !== "") {
+        sessionStorage.setItem("logged", user);
         window.location.href = "index.html";
-    } else{
+    } else {
         alert("Ingrese los datos correctamente.");
     }
 };
