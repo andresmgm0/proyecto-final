@@ -7,9 +7,9 @@ document.addEventListener("DOMContentLoaded", function () {
     if (!logged) {
 
         window.location.href = "login.html";
-    } else if (userSlot && username) {
+    } else if (userSlot && logged) {
         userSlot.innerHTML = `
-            <a class="nav-link">👤 ${username}</a>
+            <a class="nav-link">👤 ${logged}</a>
         `;
 
     }
