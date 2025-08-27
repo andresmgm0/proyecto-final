@@ -40,16 +40,6 @@ let getJSONData = function (url) {
     });
 };
 
-<<<<<<< HEAD
-document.addEventListener("DOMContentLoaded", function(){
-    let logged = sessionStorage.getItem("logged");
-    if(!logged){
-      window.location.href = "login.html";
-    }
-    else{
-      document.getElementById("user-nav").textContent = logged;
-    }
-=======
 document.addEventListener("DOMContentLoaded", function () {
   let logged = sessionStorage.getItem("logged");
   const userSlot = document.getElementById("user-slot");
@@ -61,5 +51,4 @@ document.addEventListener("DOMContentLoaded", function () {
             <a class="nav-link">👤 ${logged}</a>
         `;
   }
->>>>>>> Facundo
 });
