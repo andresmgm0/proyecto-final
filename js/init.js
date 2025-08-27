@@ -42,10 +42,13 @@ let getJSONData = function(url){
 
 document.addEventListener("DOMContentLoaded", function(){
     let logged = sessionStorage.getItem("logged");
+    const userSlot = document.getElementById("user-slot");
     if(!logged){
       window.location.href = "login.html";
     }
     else{
-      document.getElementById("user-nav").textContent = logged;
+       userSlot.innerHTML = `
+            <a class="nav-link">👤 ${logged}</a>
+        `;
     }
 });
