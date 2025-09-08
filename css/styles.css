@@ -189,9 +189,9 @@ a.custom-card:hover {
   color: orange;
 }
 
-/* estilos aplicados por el grupo**/
+/*Estilos aplicados por el grupo*/
 
-/* Login*/
+/*Login*/
 body {
   background-color: rgb(248, 249, 250);
 }
@@ -292,3 +292,33 @@ color: #000;
   }
 }
 
+/*Product info*/
+.back-btn {
+  float: right;
+  border: none;
+  background: #e9ecef;
+  border-radius: 50%;
+  padding: 5px 10px;
+  font-size: 18px;
+}
+.prod-info-h2{
+  padding-top: 5%;
+}
+.product-img {
+  padding-top: 5%;
+  max-width: 100%;
+  height: auto;
+  border-radius: 10px;
+}
+.add-to-cart {
+  background-color: #F09100;
+  border: none;
+  border-radius: 20px;
+  padding: 10px 20px;
+}
+.gallery-img {
+  max-width: 100%;
+  height: auto;
+  margin: 10px 0;
+  border-radius: 10px;
+}
