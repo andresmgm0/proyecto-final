@@ -8,7 +8,6 @@ document.addEventListener("DOMContentLoaded", function(e){
     .then(data => {
         productsArray = data.products;
         productosMostrados = [...productsArray];
-        aplicarOrden("relevancia");
         //console.log(productsArray);
         showProducts(productsArray);
     })
@@ -57,7 +56,7 @@ function resetFiltros() {
   document.getElementById("rangeFilterPriceMin").value = "";
   document.getElementById("rangeFilterPriceMax").value = "";
   productosMostrados = [...productsArray];
-  aplicarOrden(); // vuelve a ordenar con el criterio activo
+  showProducts(productsArray); // vuelve a ordenar con el criterio activo
 }
 
 function aplicarOrden(criterioActual) {
