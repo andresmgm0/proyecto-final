@@ -6,9 +6,10 @@ document.addEventListener("DOMContentLoaded", function (e) {
   const url = `${PRODUCTS_URL}${id}.json`;
   fetch(url).then(res => res.json())
     .then(data => {
-      productsArray = data.products;
-      productosMostrados = [...productsArray];
-      showProducts(productsArray);
+     productsArray = data.products;
+     productosMostrados = [...productsArray];
+     //console.log(productsArray);
+     showProducts(productsArray);
     })
     .catch(error => console.error(error));
 
@@ -68,7 +69,7 @@ function resetFiltros() {
   document.getElementById("rangeFilterPriceMin").value = "";
   document.getElementById("rangeFilterPriceMax").value = "";
   productosMostrados = [...productsArray];
-  aplicarOrden();
+  showProducts(productsArray); // vuelve a ordenar con el criterio activo
 }
 
 function aplicarOrden(criterioActual) {
