@@ -24,7 +24,7 @@ function showProduct(product){
                             <button class="btn add-to-cart">Agregar al carrito</button>
                         </div>
                     </div>
-                    <h2 class="mt-4">Galería de imágenes</h2>
+                    <h2 class="mt-4" id="h2-gal">Galería de imágenes</h2>
                     <div class="row">
                         ${product.images.map(img => `<div class="col-3"><img src="${img}" class="gallery-img"></div>`).join("")}
                     </div>
