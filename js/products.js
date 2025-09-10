@@ -1,55 +1,68 @@
 let productsArray = [];
 let productosMostrados = [];
 
-document.addEventListener("DOMContentLoaded", function(e){
-    const id = localStorage.getItem("catID");
-    const url = `${PRODUCTS_URL}${id}.json`;
-    fetch(url).then(res => res.json())
+document.addEventListener("DOMContentLoaded", function (e) {
+  const id = localStorage.getItem("catID");
+  const url = `${PRODUCTS_URL}${id}.json`;
+  fetch(url).then(res => res.json())
     .then(data => {
-        productsArray = data.products;
-        productosMostrados = [...productsArray];
-        //console.log(productsArray);
-        showProducts(productsArray);
+     productsArray = data.products;
+     productosMostrados = [...productsArray];
+     //console.log(productsArray);
+     showProducts(productsArray);
     })
     .catch(error => console.error(error));
 
-    // Botones de orden
   document.getElementById("sortAsc").addEventListener("click", () => aplicarOrden("asc"));
   document.getElementById("sortDesc").addEventListener("click", () => aplicarOrden("desc"));
   document.getElementById("sortByCount").addEventListener("click", () => aplicarOrden("relevancia"));
 
-   // Filtros
   document.getElementById("rangeFilterPrice").addEventListener("click", filtrarProductos);
   document.getElementById("clearRangeFilter").addEventListener("click", resetFiltros);
+
+
+  const searchInput = document.getElementById("searchInput");
+  if (searchInput) {
+    searchInput.addEventListener("input", () => {
+      const query = searchInput.value.toLowerCase().trim();
+
+      productosMostrados = productsArray.filter(p =>
+        p.name.toLowerCase().includes(query) ||
+        p.description.toLowerCase().includes(query)
+      );
+
+      aplicarOrden();
+    });
+  }
 });
 
-function setProdID(id){
-    localStorage.setItem("ProdID", id);
-    window.location = "product-info.html"
+function setProdID(id) {
+  localStorage.setItem("ProdID", id);
+  window.location = "product-info.html"
 }
 
-function showProducts(array){
-    let contenido = ""
-    array.forEach(prod => {
-        contenido +=`<div class="product-card" onclick="setProdID(${prod.id})">
-                        <img src="${prod.image}" alt="${prod.name} ">
+function showProducts(array) {
+  let contenido = "";
+  array.forEach(prod => {
+    contenido += `<div class="product-card" onclick="setProdID(${prod.id})">
+                        <img src="${prod.image}" alt="${prod.name}">
                         <div class="product-info">
                             <h3>${prod.name}</h3>
                             <p>${prod.description}</p>
                             <p><strong>Precio:</strong> ${prod.currency} ${prod.cost}</p>
-                            <p><strong>Vendidos:</strong>${prod.soldCount}</p>
+                            <p><strong>Vendidos:</strong> ${prod.soldCount}</p>
                         </div>
-                    </div>
-                    `
-    });
-    document.getElementById("prod-list-container").innerHTML = contenido;
-};
+                    </div>`;
+  });
+  document.getElementById("prod-list-container").innerHTML = contenido;
+}
+
 function filtrarProductos() {
   const min = parseInt(document.getElementById("rangeFilterPriceMin").value) || 0;
   const max = parseInt(document.getElementById("rangeFilterPriceMax").value) || Infinity;
 
   productosMostrados = productsArray.filter(p => p.cost >= min && p.cost <= max);
-  aplicarOrden(); // respeta el último criterio de orden
+  aplicarOrden();
 }
 
 function resetFiltros() {
