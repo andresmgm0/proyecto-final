@@ -52,8 +52,8 @@ function showComments(comments){
                             <small class="text-muted">${comment.dateTime}</small>
                             </div>
                             <p class="mb-2">${comment.description}</p>
-                            <div class="text-warning">
-                            ${"★".repeat(comment.score)}${"☆".repeat(5 - comment.score)}
+                            <div>
+                            ${`<span class="fa fa-star checked"></span>`.repeat(comment.score)}${`<span class="fa fa-star"></span>`.repeat(5 - comment.score)}
                             </div>
                         </div>
                       </div>`;
