@@ -337,3 +337,7 @@ color: #000;
         max-width: 100%;
     }
 }
+
+#card-comment {
+  margin-bottom: 1%;
+}

@@ -1,10 +1,19 @@
 document.addEventListener("DOMContentLoaded", function(e){
     const id = localStorage.getItem("ProdID");
     const url = `${PRODUCT_INFO_URL}${id}.json`;
+    const urlComments = `${PRODUCT_INFO_COMMENTS_URL}${id}.json`
+    
     fetch(url).then(res => res.json())
     .then(product => {
         //console.log(product);
         showProduct(product);
+    })
+    .catch(error => console.error(error));
+
+    fetch(urlComments).then(res => res.json())
+    .then(comments => {
+        console.log(comments);
+        showComments(comments);
     })
     .catch(error => console.error(error));
 });
@@ -31,4 +40,23 @@ function showProduct(product){
                     `
 
     document.getElementById("product").innerHTML = contenido;
+};
+
+function showComments(comments){
+    let contenido = `<h2 class="mt-4">Calificaciones</h2>`;
+    comments.forEach(comment => {
+        contenido +=`<div class="card shadow-sm" id="card-comment">
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between">
+                            <h6 class="mb-1 fw-bold">${comment.user}</h6>
+                            <small class="text-muted">${comment.dateTime}</small>
+                            </div>
+                            <p class="mb-2">${comment.description}</p>
+                            <div>
+                            ${`<span class="fa fa-star checked"></span>`.repeat(comment.score)}${`<span class="fa fa-star"></span>`.repeat(5 - comment.score)}
+                            </div>
+                        </div>
+                      </div>`;
+    });
+    document.getElementById("comments").innerHTML = contenido;
 };
