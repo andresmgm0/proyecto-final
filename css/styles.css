@@ -373,3 +373,6 @@ color: #000;
 .btn-custom:hover {
   background-color: #e6b800;
 }
+.rating .fa-star.checked {
+  color: orange !important;
+}

@@ -14,6 +14,7 @@ document.addEventListener("DOMContentLoaded", function(e){
     .then(comments => {
         console.log(comments);
         showComments(comments);
+        newComment(comments);
     })
     .catch(error => console.error(error));
 });
@@ -59,4 +60,39 @@ function showComments(comments){
                       </div>`;
     });
     document.getElementById("comments").innerHTML = contenido;
+};
+function newComment(comments){
+    let stars = document.querySelectorAll(".rating .fa-star");
+    let newScore = 0;
+
+
+    //Interaccion con las estrellas.
+    stars.forEach(star => {
+        //Al poner el mouse arriba, se marcan.
+        star.addEventListener("mouseover", function(){
+            let val = parseInt(this.getAttribute("data-value"));
+            highlightStars(val);
+        });
+        //Al hacer clic, se guarda la calificacion.
+        star.addEventListener("click", function(){
+            newScore = parseInt(this.getAttribute("data-value"));
+            highlightStars(newScore);
+        });
+        //Al quitar el mouse, deja las estrellas marcadas con la calificacion.
+        star.addEventListener("mouseout", function(){
+            highlightStars(newScore);
+        });
+    });
+
+
+        function highlightStars(limit){
+        stars.forEach(star => {
+            let val = parseInt(star.getAttribute("data-value"));
+            if(val <= limit){
+                star.classList.add("checked");
+            } else {
+                star.classList.remove("checked");
+            }
+        });
+    }
 };
