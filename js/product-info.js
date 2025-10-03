@@ -61,10 +61,23 @@ function showComments(comments){
     });
     document.getElementById("comments").innerHTML = contenido;
 };
+
+//Funcion para agregar la fecha con el mismo formato de los demas comentarios.
+function getDate(){
+    let d = new Date();
+    let year = d.getFullYear();
+    let month = String(d.getMonth() + 1).padStart(2, '0');
+    let day = String(d.getDate()).padStart(2, '0');
+    let hours = String(d.getHours()).padStart(2, '0');
+    let minutes = String(d.getMinutes()).padStart(2, '0');
+    let seconds = String(d.getSeconds()).padStart(2, '0');
+
+    return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
+};
+
 function newComment(comments){
     let stars = document.querySelectorAll(".rating .fa-star");
     let newScore = 0;
-
 
     //Interaccion con las estrellas.
     stars.forEach(star => {
@@ -84,15 +97,35 @@ function newComment(comments){
         });
     });
 
-
-        function highlightStars(limit){
-        stars.forEach(star => {
-            let val = parseInt(star.getAttribute("data-value"));
-            if(val <= limit){
-                star.classList.add("checked");
-            } else {
-                star.classList.remove("checked");
-            }
-        });
+    function highlightStars(limit){
+    stars.forEach(star => {
+        let val = parseInt(star.getAttribute("data-value"));
+        if(val <= limit){
+            star.classList.add("checked");
+        } else {
+            star.classList.remove("checked");
+        }
+    });
     }
+
+    //Anadir nuevo comentario.
+    document.getElementById("comment-send").addEventListener("click", function(){
+        let text = document.getElementById("comment-text").value.trim();
+        if(newScore === 0 || text === ""){
+            alert("Por favor selecciona una calificación y escribe un comentario.");
+            return;
+        } else { //Se crea el nuevo comentario con los datos ingresado y el nombre de usuario.
+            let newComment = {
+            user: `${sessionStorage.getItem("logged")}`,
+            description: text,
+            score: newScore,
+            dateTime: getDate()
+            };
+            comments.push(newComment); 
+            showComments(comments);
+            document.getElementById("comment-text").value = "";
+            newScore = 0;
+            highlightStars(0);
+        }
+    });
 };
