@@ -7,6 +7,7 @@ document.addEventListener("DOMContentLoaded", function(e){
     .then(product => {
         //console.log(product);
         showProduct(product);
+        showRelatedProducts(product.relatedProducts);
     })
     .catch(error => console.error(error));
 
@@ -62,6 +63,40 @@ function showComments(comments){
     document.getElementById("comments").innerHTML = contenido;
 };
 
+function showRelatedProducts(related) {
+    const container = document.getElementById("related-list");
+    container.innerHTML = "";
+
+    related.forEach(p => {
+        const col = document.createElement("div");
+        
+
+        col.innerHTML = `
+            <div class="card text-center related-item" 
+                style="cursor: pointer; width: 220px; border-radius: 10px; background-color: #f2f2f2;">
+                <div class="card-body d-flex flex-column align-items-center">    
+                    <h6 class="fw-bold mb-3">${p.name}</h6>
+
+
+                    <img src="${p.image}" 
+                        onerror="this.src='img/no-image.png';"
+                         class="img-fluid"
+                         alt="${p.name}"
+                         style="max-height: 150px; object-fit: contain;">
+                
+                    
+                </div>
+            </div>
+        `;
+        
+        col.onclick = () => {
+            localStorage.setItem("ProdID", p.id);
+            window.location = "product-info.html";
+        };
+
+        container.appendChild(col);
+    });
+}
 //Funcion para agregar la fecha con el mismo formato de los demas comentarios.
 function getDate(){
     let d = new Date();

@@ -341,6 +341,18 @@ color: #000;
 #card-comment {
   margin-bottom: 1%;
 }
+
+.related-item {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.related-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0px 4px 15px rgba(0,0,0,0.2);
+}
+
+#related-list {
+  gap: 20px;
+
 /* --- Bloque de calificación --- */
 .rating .fa-star {
   font-size: 24px;
