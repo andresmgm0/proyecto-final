@@ -41,20 +41,14 @@ let getJSONData = function (url) {
     });
 };
 
-// --- NUEVO --- //
-// Verificar sesión y mostrar usuario en navbar
-document.addEventListener("DOMContentLoaded", function () {
-  const logged = sessionStorage.getItem("logged");
-  const userSlot = document.getElementById("user-slot");
 
-  // Si no hay sesión activa, redirige al login
+document.addEventListener("DOMContentLoaded", function () {
+  let logged = sessionStorage.getItem("logged");
+  const userSlot = document.getElementById("user-slot");
   if (!logged) {
     window.location.href = "login.html";
-    return;
   }
-
-  // Mostrar el nombre del usuario en la navbar
-  if (userSlot) {
+  else {
     userSlot.innerHTML = `
       <div class="dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown">
@@ -68,7 +62,6 @@ document.addEventListener("DOMContentLoaded", function () {
     `;
   }
 
-  // Botón de cerrar sesión
   const logoutBtn = document.getElementById("logout");
   if (logoutBtn) {
     logoutBtn.addEventListener("click", function () {
