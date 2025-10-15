@@ -9,7 +9,7 @@ function mostrarAlerta(mensaje, tipo) {
         </div>
     `;
     alertContainer.innerHTML = alertHTML;
-    
+
     // Auto-cerrar después de 4 segundos
     setTimeout(() => {
         const alert = alertContainer.querySelector('.alert');
@@ -23,7 +23,7 @@ function mostrarAlerta(mensaje, tipo) {
 // Cargar datos del perfil al iniciar la página
 function cargarPerfil() {
     const perfilGuardado = localStorage.getItem('perfilUsuario');
-    
+
     if (perfilGuardado) {
         // Si hay datos guardados, cargarlos
         const perfil = JSON.parse(perfilGuardado);
@@ -31,7 +31,12 @@ function cargarPerfil() {
         document.getElementById('apellido').value = perfil.apellido || '';
         document.getElementById('email').value = perfil.email || '';
         document.getElementById('telefono').value = perfil.telefono || '';
-        
+
+        // Cargar avatar si existe
+        if (perfil.avatar) {
+            document.getElementById('avatarImage').src = perfil.avatar;
+        }
+
         mostrarAlerta('Perfil cargado correctamente', 'info');
     } else {
         // Primera vez que se ingresa - precargar el email del usuario
@@ -44,7 +49,7 @@ function cargarPerfil() {
 // Guardar perfil
 function guardarPerfil(event) {
     event.preventDefault();
-    
+
     const perfil = {
         nombre: document.getElementById('nombre').value,
         apellido: document.getElementById('apellido').value,
@@ -54,7 +59,7 @@ function guardarPerfil(event) {
 
     // Guardar en localStorage
     localStorage.setItem('perfilUsuario', JSON.stringify(perfil));
-    
+
     mostrarAlerta('¡Perfil guardado exitosamente!', 'success');
 }
 
@@ -66,8 +71,51 @@ function limpiarFormulario() {
     }
 }
 
+// Función para cargar y previsualizar imagen de avatar
+function cargarAvatar(event) {
+    const file = event.target.files[0];
+
+    if (file) {
+        // Validar que sea una imagen
+        if (!file.type.startsWith('image/')) {
+            mostrarAlerta('Por favor selecciona un archivo de imagen válido', 'danger');
+            return;
+        }
+
+        // Validar tamaño (máximo 2MB)
+        if (file.size > 2 * 1024 * 1024) {
+            mostrarAlerta('La imagen es demasiado grande. Máximo 2MB permitido', 'danger');
+            return;
+        }
+
+        const reader = new FileReader();
+        reader.onload = function (e) {
+            // Actualizar la imagen del avatar
+            document.getElementById('avatarImage').src = e.target.result;
+
+            // Guardar en localStorage
+            const perfilGuardado = localStorage.getItem('perfilUsuario');
+            let perfil = perfilGuardado ? JSON.parse(perfilGuardado) : {};
+            perfil.avatar = e.target.result;
+            localStorage.setItem('perfilUsuario', JSON.stringify(perfil));
+
+            // También guardar solo el avatar para uso global
+            localStorage.setItem('userAvatar', e.target.result);
+
+            mostrarAlerta('Avatar actualizado exitosamente', 'success');
+        };
+        reader.readAsDataURL(file);
+    }
+}
+
+// Función para obtener el avatar del usuario
+function getUserAvatar() {
+    return localStorage.getItem('userAvatar') || 'img/img_perfil.png';
+}
+
 // Event Listeners
 document.getElementById('profileForm').addEventListener('submit', guardarPerfil);
+document.getElementById('avatarInput').addEventListener('change', cargarAvatar);
 
 // Cargar perfil al cargar la página
 window.addEventListener('DOMContentLoaded', cargarPerfil);
