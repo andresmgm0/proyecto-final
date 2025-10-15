@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -50,63 +51,72 @@
     </div>
   </nav>
 
-    <main>
+  <main>
     <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-lg-8 col-md-10">
-                <div class="profile-card">
-                    <!-- Alert Container -->
-                    <div id="alertContainer"></div>
+      <div class="row justify-content-center">
+        <div class="col-lg-8 col-md-10">
+          <div class="profile-card">
+            <!-- Alert Container -->
+            <div id="alertContainer"></div>
 
-                    <!-- Avatar -->
-                    <div class="text-center mb-4">
-                        <div class="avatar-container">
-                            <div class="avatar">
-                                <div class="avatar-icon"></div>
-                            </div>
-                        </div>
-                        <h3 class="mb-1">Mi Perfil</h3>
-                        <p class="text-muted">Actualiza tu información personal</p>
-                    </div>
-
-                    <!-- Formulario -->
-                    <form id="profileForm">
-                        <div class="mb-4">
-                            <label for="nombre" class="form-label">Nombre</label>
-                            <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Ingresa tu nombre" required>
-                        </div>
-
-                        <div class="mb-4">
-                            <label for="apellido" class="form-label">Apellido</label>
-                            <input type="text" class="form-control" id="apellido" name="apellido" placeholder="Ingresa tu apellido" required>
-                        </div>
-
-                        <div class="mb-4">
-                            <label for="email" class="form-label">Email</label>
-                            <input type="email" class="form-control" id="email" name="email" placeholder="correo@ejemplo.com" required>
-                        </div>
-
-                        <div class="mb-4">
-                            <label for="telefono" class="form-label">Teléfono</label>
-                            <input type="tel" class="form-control" id="telefono" name="telefono" placeholder="+598 99 123 456" required>
-                        </div>
-
-                        <div class="d-grid gap-2 d-md-flex justify-content-md-center mt-4">
-                            <button type="submit" class="btn btn-primary btn-custom px-5">
-                                <i class="bi bi-check-circle"></i> Guardar Cambios
-                            </button>
-                            <button type="button" class="btn btn-secondary btn-custom px-5" onclick="limpiarFormulario()">
-                                <i class="bi bi-x-circle"></i> Limpiar
-                            </button>
-                        </div>
-                    </form>
+            <!-- Avatar -->
+            <div class="text-center mb-4">
+              <div class="avatar-container">
+                <img src="img/img_perfil.png" alt="Avatar del usuario" class="avatar-image" id="avatarImage">
+                <div class="avatar-overlay">
+                  <input type="file" id="avatarInput" accept="image/*" style="display: none;">
+                  <button type="button" class="btn btn-sm btn-primary avatar-upload-btn"
+                    onclick="document.getElementById('avatarInput').click()">
+                    <i class="bi bi-camera"></i> Cambiar
+                  </button>
                 </div>
+              </div>
+              <h3 class="mb-1">Mi Perfil</h3>
+              <p class="text-muted">Actualiza tu información personal</p>
             </div>
+
+            <!-- Formulario -->
+            <form id="profileForm">
+              <div class="mb-4">
+                <label for="nombre" class="form-label">Nombre</label>
+                <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Ingresa tu nombre"
+                  required>
+              </div>
+
+              <div class="mb-4">
+                <label for="apellido" class="form-label">Apellido</label>
+                <input type="text" class="form-control" id="apellido" name="apellido" placeholder="Ingresa tu apellido"
+                  required>
+              </div>
+
+              <div class="mb-4">
+                <label for="email" class="form-label">Email</label>
+                <input type="email" class="form-control" id="email" name="email" placeholder="correo@ejemplo.com"
+                  required>
+              </div>
+
+              <div class="mb-4">
+                <label for="telefono" class="form-label">Teléfono</label>
+                <input type="tel" class="form-control" id="telefono" name="telefono" placeholder="+598 99 123 456"
+                  required>
+              </div>
+
+              <div class="d-grid gap-2 d-md-flex justify-content-md-center mt-4">
+                <button type="submit" class="btn btn-primary btn-custom px-5">
+                  <i class="bi bi-check-circle"></i> Guardar Cambios
+                </button>
+                <button type="button" class="btn btn-secondary btn-custom px-5" onclick="limpiarFormulario()">
+                  <i class="bi bi-x-circle"></i> Limpiar
+                </button>
+              </div>
+            </form>
+          </div>
         </div>
+      </div>
     </div>
-    </main>
-    
-    <footer class="text-muted">
+  </main>
+
+  <footer class="text-muted">
     <div class="container">
       <p class="float-end">
         <a href="#">Volver arriba</a>
@@ -114,10 +124,10 @@
       <p>Este sitio forma parte de <a href="https://jovenesaprogramar.edu.uy/" target="_blank">Jovenes a Programar</a>
       </p>
     </div>
-    </footer>
-    <script src="js/bootstrap.bundle.min.js"></script>
-    <script src="js/init.js"></script>
-    <script src="js/my-profile.js"></script>
+  </footer>
+  <script src="js/bootstrap.bundle.min.js"></script>
+  <script src="js/init.js"></script>
+  <script src="js/my-profile.js"></script>
 </body>
 
 </html>

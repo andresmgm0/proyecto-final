@@ -197,76 +197,78 @@ body {
 }
 
 .custom-input {
-background-color: #F09100; 
-border: none;
-border-radius: 10px;
-padding: 12px;
-text-align: center;
-color: #333;
-width: 50%;
-display: block;
-margin: 0 auto;
-box-shadow: 0px 3px 6px rgba(0,0,0,0.3);
+  background-color: #F09100;
+  border: none;
+  border-radius: 10px;
+  padding: 12px;
+  text-align: center;
+  color: #333;
+  width: 50%;
+  display: block;
+  margin: 0 auto;
+  box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.3);
 }
 
 .btn-custom {
-background-color: #F09100;
-color: white;
-border: none;
-border-radius: 40px;
-box-shadow: 0px 2px 3px rgba(0,0,0,0.3);
-padding: 10px 30px;
+  background-color: #F09100;
+  color: white;
+  border: none;
+  border-radius: 40px;
+  box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.3);
+  padding: 10px 30px;
 }
 
 .btn-custom:hover {
-background-color: #e6b800;
+  background-color: #e6b800;
 }
 
 /*Products*/
 .products-list h2 {
-text-align: center;
-font-size: 24px;
-font-weight: bold;
+  text-align: center;
+  font-size: 24px;
+  font-weight: bold;
 }
 
 .product-card {
-display: flex;
-align-items: center;
-background: white;
-border-radius: 10px;
-padding: 15px;
-margin: 15px auto;
-box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
-max-width: 90%;
+  display: flex;
+  align-items: center;
+  background: white;
+  border-radius: 10px;
+  padding: 15px;
+  margin: 15px auto;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+  max-width: 90%;
 }
 
 .product-card img {
-width: 30%;
-height: auto;
-border-radius: 8px;
-margin-right: 15px;
+  width: 30%;
+  height: auto;
+  border-radius: 8px;
+  margin-right: 15px;
 }
 
 .product-info {
-flex: 1;
+  flex: 1;
 }
 
 .products-list.product-info h3 {
-margin: 0;
-font-size: 18px;
-font-weight: bold;
+  margin: 0;
+  font-size: 18px;
+  font-weight: bold;
 }
 
 .product-info p {
-margin: 4px 0;
-color: #555;
+  margin: 4px 0;
+  color: #555;
 }
 
 .product-info p strong {
-color: #000;
+  color: #000;
 }
 
-@media (max-width: 430px) { /*Para dispositivos pequeños*/
+@media (max-width: 430px) {
+
+  /*Para dispositivos pequeños*/
   .product-card {
     flex-direction: column;
     align-items: flex-start;
@@ -301,41 +303,52 @@ color: #000;
   padding: 5px 10px;
   font-size: 18px;
 }
-.prod-info-h2{
+
+.prod-info-h2 {
   padding-top: 5%;
 }
+
 .product-img {
   padding-top: 5%;
   max-width: 100%;
   height: auto;
   border-radius: 10px;
 }
+
 .add-to-cart {
   background-color: #F09100;
   border: none;
   border-radius: 20px;
   padding: 10px 20px;
 }
+
 #h2-gal {
   text-align: center;
 }
+
 .gallery-img {
   max-width: 100%;
   height: auto;
   margin: 10px 0;
   border-radius: 10px;
 }
-@media (max-width: 1024px) { /*Para dispositivos medianos*/
-    .row .col-3 {
-        flex: 0 0 50%;
-        max-width: 50%;
-    }
+
+@media (max-width: 1024px) {
+
+  /*Para dispositivos medianos*/
+  .row .col-3 {
+    flex: 0 0 50%;
+    max-width: 50%;
+  }
 }
-@media (max-width: 430px) { /*Para dispositivos pequeños*/
-    .row .col-3 {
-        flex: 0 0 100%;
-        max-width: 100%;
-    }
+
+@media (max-width: 430px) {
+
+  /*Para dispositivos pequeños*/
+  .row .col-3 {
+    flex: 0 0 100%;
+    max-width: 100%;
+  }
 }
 
 #card-comment {
@@ -345,18 +358,21 @@ color: #000;
 .related-item {
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
+
 .related-item:hover {
   transform: translateY(-5px);
-  box-shadow: 0px 4px 15px rgba(0,0,0,0.2);
+  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
 }
 
 #related-list {
   gap: 20px;
 }
+
 /* --- Bloque de calificación --- */
 .rating .fa-star {
   font-size: 24px;
-  color: #ccc; /* estrellas apagadas */
+  color: #ccc;
+  /* estrellas apagadas */
   margin-right: 5px;
 }
 
@@ -376,7 +392,7 @@ color: #000;
   color: white;
   border: none;
   border-radius: 40px;
-  box-shadow: 0px 2px 3px rgba(0,0,0,0.3);
+  box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.3);
   padding: 10px 30px;
   display: block;
   margin: 0 auto;
@@ -385,6 +401,7 @@ color: #000;
 .btn-custom:hover {
   background-color: #e6b800;
 }
+
 .rating .fa-star.checked {
   color: orange !important;
 }
@@ -397,43 +414,628 @@ color: #000;
   position: relative;
 }
 
-.avatar {
+.avatar-image {
   width: 100%;
   height: 100%;
   border-radius: 50%;
-  background: linear-gradient(135deg, #e0e0e0 0%, #d0d0d0 100%);
+  object-fit: cover;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  border: 4px solid #fff;
+}
+
+.avatar-image:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+}
+
+/* Overlay del avatar */
+.avatar-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  border-radius: 50%;
   display: flex;
   align-items: center;
-  justify-Content: center;
-  overflow: hidden;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  justify-content: center;
+  opacity: 0;
+  transition: all 0.3s ease;
+  cursor: pointer;
 }
 
-.avatar-icon {
-  width: 70%;
-  height: 70%;
-  background-color: #bdbdbd;
-  border-radius: 50%;
-  position: relative;
-  top: 25px;
+.avatar-container:hover .avatar-overlay {
+  opacity: 1;
 }
 
-.avatar-icon::before {
-  content: '';
-  position: absolute;
-  width: 70px;
-  height: 70px;
-  background-color: #bdbdbd;
-  border-radius: 50%;
-  top: -35px;
-  left: 50%;
-  transform: translateX(-50%);
+.avatar-upload-btn {
+  background-color: #F09100 !important;
+  border-color: #F09100 !important;
+  color: white !important;
+  border-radius: 20px !important;
+  padding: 8px 16px !important;
+  font-size: 0.8em !important;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2) !important;
+}
+
+.avatar-upload-btn:hover {
+  background-color: #e6b800 !important;
+  border-color: #e6b800 !important;
+  transform: scale(1.05);
 }
 
 .profile-card {
   background: white;
   border-radius: 15px;
-  box-shadow: 0 2px 20px rgba(0,0,0,0.08);
+  box-shadow: 0 2px 20px rgba(0, 0, 0, 0.08);
   padding: 40px;
   margin-top: 30px;
+}
+
+/* ===== MODO OSCURO ===== */
+.dark-mode {
+  background-color: #1a1a1a !important;
+  color: #e0e0e0 !important;
+}
+
+/* Modo oscuro específico para login - fondo más oscuro */
+.dark-mode main[style*="background-color: #f7f7f7"] {
+  background-color: #0d1117 !important;
+}
+
+/* El navbar mantiene su color oscuro por defecto */
+
+
+/* Estilos para los enlaces del navbar */
+.navbar .nav-link {
+  color: #6c757d !important;
+  /* Gris por defecto */
+  transition: color 0.3s ease;
+}
+
+.navbar .nav-link:hover {
+  color: #ffffff !important;
+  /* Blanco al hacer hover */
+}
+
+.navbar .nav-link.active {
+  color: #ffffff !important;
+  /* Blanco cuando está activo */
+  font-weight: 600;
+}
+
+/* Las letras del navbar mantienen su color original en modo oscuro */
+.dark-mode .navbar .nav-link {
+  color: #6c757d !important;
+  /* Gris en modo oscuro también */
+}
+
+.dark-mode .navbar .nav-link:hover {
+  color: #ffffff !important;
+  /* Blanco al hacer hover en modo oscuro */
+}
+
+.dark-mode .navbar .nav-link.active {
+  color: #ffffff !important;
+  /* Blanco cuando está activo en modo oscuro */
+}
+
+.dark-mode .navbar .dropdown-menu {
+  background-color: #2d2d2d !important;
+  border: 1px solid #444 !important;
+}
+
+.dark-mode .navbar .dropdown-item {
+  color: #e0e0e0 !important;
+}
+
+.dark-mode .navbar .dropdown-item:hover {
+  background-color: #444 !important;
+}
+
+.dark-mode .navbar .dropdown-item-text {
+  color: #e0e0e0 !important;
+}
+
+.dark-mode .jumbotron {
+  background-color: #2d2d2d !important;
+  color: #e0e0e0 !important;
+}
+
+.dark-mode .jumbotron .container {
+  background-color: rgba(45, 45, 45, 0.8) !important;
+}
+
+.dark-mode .album {
+  background-color: #1a1a1a !important;
+}
+
+.dark-mode .card {
+  background-color: #2d2d2d !important;
+  border: 1px solid #444 !important;
+  color: #e0e0e0 !important;
+}
+
+.dark-mode .card-body {
+  color: #e0e0e0 !important;
+}
+
+.dark-mode .card-text {
+  color: #b0b0b0 !important;
+}
+
+.dark-mode .btn-light {
+  background-color: #444 !important;
+  border-color: #555 !important;
+  color: #e0e0e0 !important;
+}
+
+.dark-mode .btn-light:hover {
+  background-color: #555 !important;
+  border-color: #666 !important;
+}
+
+.dark-mode .form-control {
+  background-color: #2d2d2d !important;
+  border-color: #444 !important;
+  color: #e0e0e0 !important;
+}
+
+.dark-mode .form-control:focus {
+  background-color: #2d2d2d !important;
+  border-color: #666 !important;
+  color: #e0e0e0 !important;
+  box-shadow: 0 0 0 0.2rem rgba(102, 102, 102, 0.25) !important;
+}
+
+.dark-mode .custom-input {
+  background-color: #444 !important;
+  color: #e0e0e0 !important;
+}
+
+.dark-mode .btn-custom {
+  background-color: #F09100 !important;
+  color: white !important;
+}
+
+.dark-mode .btn-custom:hover {
+  background-color: #e6b800 !important;
+}
+
+.dark-mode .profile-card {
+  background-color: #2d2d2d !important;
+  color: #e0e0e0 !important;
+}
+
+.dark-mode .avatar {
+  background: linear-gradient(135deg, #444 0%, #333 100%) !important;
+}
+
+.dark-mode .avatar-icon {
+  background-color: #666 !important;
+}
+
+.dark-mode .avatar-image {
+  border-color: #444 !important;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3) !important;
+}
+
+.dark-mode .avatar-image:hover {
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4) !important;
+}
+
+.dark-mode .product-card {
+  background-color: #2d2d2d !important;
+  color: #e0e0e0 !important;
+  border: 1px solid #444 !important;
+}
+
+.dark-mode .product-info p {
+  color: #b0b0b0 !important;
+}
+
+.dark-mode .product-info p strong {
+  color: #e0e0e0 !important;
+}
+
+.dark-mode .list-group-item {
+  background-color: #2d2d2d !important;
+  border-color: #444 !important;
+  color: #e0e0e0 !important;
+}
+
+.dark-mode .list-group-item:hover {
+  background-color: #444 !important;
+}
+
+.dark-mode .text-muted {
+  color: #b0b0b0 !important;
+}
+
+.dark-mode .lead {
+  color: #e0e0e0 !important;
+}
+
+.dark-mode .bg-white {
+  background-color: #2d2d2d !important;
+}
+
+/* Formulario de login en modo oscuro - contraste sutil */
+.dark-mode .bg-white.p-5.rounded.shadow {
+  background-color: #1e2329 !important;
+  border: 1px solid #30363d !important;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3) !important;
+}
+
+/* Mejorar contraste del texto en el formulario de login */
+.dark-mode .bg-white.p-5.rounded.shadow .form-label {
+  color: #e0e0e0 !important;
+  font-weight: 600;
+}
+
+.dark-mode .bg-white.p-5.rounded.shadow .text-muted {
+  color: #8b949e !important;
+}
+
+.dark-mode .bg-light {
+  background-color: #1a1a1a !important;
+}
+
+.dark-mode .alert {
+  background-color: #2d2d2d !important;
+  border-color: #444 !important;
+  color: #e0e0e0 !important;
+}
+
+.dark-mode .alert-success {
+  background-color: #1e4d2b !important;
+  border-color: #2d5a3d !important;
+  color: #d4edda !important;
+}
+
+.dark-mode .alert-danger {
+  background-color: #4d1e1e !important;
+  border-color: #5a2d2d !important;
+  color: #f8d7da !important;
+}
+
+.dark-mode .alert-warning {
+  background-color: #4d3e1e !important;
+  border-color: #5a4a2d !important;
+  color: #fff3cd !important;
+}
+
+.dark-mode .alert-info {
+  background-color: #1e3a4d !important;
+  border-color: #2d4a5a !important;
+  color: #d1ecf1 !important;
+}
+
+.dark-mode .modal-content {
+  background-color: #2d2d2d !important;
+  color: #e0e0e0 !important;
+}
+
+.dark-mode .modal-header {
+  border-bottom-color: #444 !important;
+}
+
+.dark-mode .modal-footer {
+  border-top-color: #444 !important;
+}
+
+.dark-mode .close {
+  color: #e0e0e0 !important;
+  opacity: 0.8;
+}
+
+.dark-mode .close:hover {
+  color: #ffffff !important;
+  opacity: 1;
+}
+
+.dark-mode .table {
+  color: #e0e0e0 !important;
+}
+
+.dark-mode .table th {
+  border-color: #444 !important;
+}
+
+.dark-mode .table td {
+  border-color: #444 !important;
+}
+
+.dark-mode .table-striped tbody tr:nth-of-type(odd) {
+  background-color: rgba(255, 255, 255, 0.05) !important;
+}
+
+.dark-mode .table-hover tbody tr:hover {
+  background-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+.dark-mode .pagination .page-link {
+  background-color: #2d2d2d !important;
+  border-color: #444 !important;
+  color: #e0e0e0 !important;
+}
+
+.dark-mode .pagination .page-link:hover {
+  background-color: #444 !important;
+  border-color: #555 !important;
+  color: #ffffff !important;
+}
+
+.dark-mode .pagination .page-item.active .page-link {
+  background-color: #F09100 !important;
+  border-color: #F09100 !important;
+  color: white !important;
+}
+
+.dark-mode .pagination .page-item.disabled .page-link {
+  background-color: #2d2d2d !important;
+  border-color: #444 !important;
+  color: #666 !important;
+}
+
+.dark-mode .dropdown-divider {
+  border-top-color: #444 !important;
+}
+
+.dark-mode .form-check-input:checked {
+  background-color: #F09100 !important;
+  border-color: #F09100 !important;
+}
+
+.dark-mode .form-check-input:focus {
+  border-color: #666 !important;
+  box-shadow: 0 0 0 0.2rem rgba(102, 102, 102, 0.25) !important;
+}
+
+/* ===== SWITCH DESLIZABLE PERSONALIZADO ===== */
+
+/* Contenedor principal del toggle */
+.theme-toggle-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.theme-toggle-wrapper-dropdown {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Contenedor del switch */
+.theme-switch-container {
+  position: relative;
+  display: inline-block;
+}
+
+/* Input checkbox oculto */
+.theme-switch {
+  opacity: 0;
+  width: 0;
+  height: 0;
+  position: absolute;
+}
+
+/* Label del switch (fondo) */
+.theme-switch-label {
+  display: block;
+  width: 50px;
+  height: 24px;
+  background: linear-gradient(90deg, #ffd700 0%, #ff6b35 50%, #1a1a1a 100%);
+  border-radius: 12px;
+  position: relative;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* Slider deslizable */
+.theme-switch-slider {
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 20px;
+  height: 20px;
+  background: white;
+  border-radius: 50%;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 10px;
+  overflow: hidden;
+}
+
+/* Emojis dentro del slider */
+.theme-switch-slider::before {
+  content: "☀️";
+  transition: all 0.3s ease;
+  display: block;
+}
+
+.theme-switch:checked+.theme-switch-label .theme-switch-slider::before {
+  content: "🌙";
+}
+
+/* Estado activo (modo oscuro) */
+.theme-switch:checked+.theme-switch-label {
+  background: linear-gradient(90deg, #1a1a1a 0%, #2d2d2d 50%, #4a4a4a 100%);
+}
+
+.theme-switch:checked+.theme-switch-label .theme-switch-slider {
+  transform: translateX(26px);
+  background: #2d2d2d;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+}
+
+/* Efectos hover */
+.theme-switch-label:hover {
+  transform: scale(1.05);
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2), 0 0 8px rgba(240, 145, 0, 0.3);
+}
+
+.dark-mode .theme-switch-label:hover {
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.3), 0 0 8px rgba(240, 145, 0, 0.4);
+}
+
+/* Contenedor del toggle de login */
+#themeToggleContainer {
+  transition: all 0.3s ease;
+  border: 1px solid #dee2e6;
+}
+
+.dark-mode #themeToggleContainer {
+  background-color: #2d2d2d !important;
+  border-color: #444 !important;
+}
+
+/* Texto del tema en el dropdown */
+#themeText {
+  font-weight: 500;
+  transition: color 0.3s ease;
+  font-size: 0.9em;
+}
+
+.dark-mode #themeText {
+  color: #e0e0e0 !important;
+}
+
+/* Mejorar la visibilidad del toggle en login */
+.position-fixed .text-muted {
+  color: #6c757d !important;
+  font-weight: 500;
+}
+
+.dark-mode .position-fixed .text-muted {
+  color: #e0e0e0 !important;
+}
+
+/* Avatar del usuario en la navbar */
+.user-avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #fff;
+  transition: all 0.3s ease;
+}
+
+.user-avatar:hover {
+  transform: scale(1.1);
+  border-color: #F09100;
+}
+
+.dark-mode .user-avatar {
+  border-color: #444;
+}
+
+.dark-mode .user-avatar:hover {
+  border-color: #F09100;
+}
+
+/* Animación del emoji dentro del slider */
+.theme-switch-slider::before {
+  animation: emojiPulse 0.3s ease-in-out;
+}
+
+@keyframes emojiPulse {
+  0% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.2);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
+
+/* Área de carga de imágenes en Vender */
+.dz-clickable {
+  background-color: #f8f9fa !important;
+  /* Fondo gris claro */
+  border: 2px dashed #6c757d !important;
+  /* Borde gris punteado */
+  transition: all 0.3s ease;
+}
+
+.dz-clickable:hover {
+  background-color: #e9ecef !important;
+  /* Fondo gris más oscuro en hover */
+  border-color: #495057 !important;
+}
+
+/* Modo oscuro para el área de carga */
+.dark-mode .dz-clickable {
+  background-color: #3d3d3d !important;
+  /* Fondo gris oscuro en modo oscuro */
+  border-color: #6c757d !important;
+}
+
+.dark-mode .dz-clickable:hover {
+  background-color: #4a4a4a !important;
+  /* Fondo gris más claro en hover modo oscuro */
+  border-color: #adb5bd !important;
+}
+
+/* Estilos para los dropdowns en Vender */
+.form-select,
+.custom-select {
+  background-color: #f8f9fa !important;
+  /* Fondo gris claro */
+  border-color: #6c757d !important;
+  /* Borde gris */
+  color: #495057 !important;
+  /* Texto gris oscuro */
+  transition: all 0.3s ease;
+}
+
+.form-select:hover,
+.custom-select:hover {
+  background-color: #e9ecef !important;
+  /* Fondo gris más oscuro en hover */
+  border-color: #495057 !important;
+}
+
+.form-select:focus,
+.custom-select:focus {
+  background-color: #f8f9fa !important;
+  border-color: #F09100 !important;
+  /* Borde naranja al enfocar */
+  box-shadow: 0 0 0 0.2rem rgba(240, 145, 0, 0.25) !important;
+}
+
+/* Modo oscuro para los dropdowns */
+.dark-mode .form-select,
+.dark-mode .custom-select {
+  background-color: #3d3d3d !important;
+  /* Fondo gris oscuro */
+  border-color: #6c757d !important;
+  color: #e0e0e0 !important;
+  /* Texto claro */
+}
+
+.dark-mode .form-select:hover,
+.dark-mode .custom-select:hover {
+  background-color: #4a4a4a !important;
+  /* Fondo gris más claro en hover */
+  border-color: #adb5bd !important;
+}
+
+.dark-mode .form-select:focus,
+.dark-mode .custom-select:focus {
+  background-color: #3d3d3d !important;
+  border-color: #F09100 !important;
+  /* Borde naranja al enfocar */
+  box-shadow: 0 0 0 0.2rem rgba(240, 145, 0, 0.25) !important;
 }
