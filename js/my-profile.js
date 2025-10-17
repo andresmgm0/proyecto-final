@@ -35,6 +35,8 @@ function cargarPerfil() {
         // Cargar avatar si existe
         if (perfil.avatar) {
             document.getElementById('avatarImage').src = perfil.avatar;
+            // También actualizar el navbar
+            updateNavbarAvatar(perfil.avatar);
         }
 
         mostrarAlerta('Perfil cargado correctamente', 'info');
@@ -102,6 +104,9 @@ function cargarAvatar(event) {
             // También guardar solo el avatar para uso global
             localStorage.setItem('userAvatar', e.target.result);
 
+            // Actualizar el avatar en el navbar si existe
+            updateNavbarAvatar(e.target.result);
+
             mostrarAlerta('Avatar actualizado exitosamente', 'success');
         };
         reader.readAsDataURL(file);
@@ -111,6 +116,14 @@ function cargarAvatar(event) {
 // Función para obtener el avatar del usuario
 function getUserAvatar() {
     return localStorage.getItem('userAvatar') || 'img/img_perfil.png';
+}
+
+// Función para actualizar el avatar en el navbar
+function updateNavbarAvatar(avatarSrc) {
+    const navbarAvatar = document.querySelector('.user-avatar');
+    if (navbarAvatar) {
+        navbarAvatar.src = avatarSrc;
+    }
 }
 
 // Event Listeners

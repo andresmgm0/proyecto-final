@@ -180,5 +180,33 @@ function updateThemeIcons(isDarkMode) {
     }
   }
 
+  // Cambiar imagen de login según el modo
+  updateLoginImage(isDarkMode);
+
+  // Cambiar imagen de fondo del jumbotron según el modo
+  updateBackgroundImage(isDarkMode);
+
   // Los emojis dentro del slider cambian automáticamente con CSS
+}
+
+function updateLoginImage(isDarkMode) {
+  const loginImage = document.querySelector('img[alt="Logo eMercado"]');
+  if (loginImage) {
+    if (isDarkMode) {
+      loginImage.src = "img/login-dark.jpg";
+    } else {
+      loginImage.src = "img/login.png";
+    }
+  }
+}
+
+function updateBackgroundImage(isDarkMode) {
+  const jumbotron = document.querySelector('.jumbotron');
+  if (jumbotron) {
+    if (isDarkMode) {
+      jumbotron.style.backgroundImage = "url('img/body-dark.jpg')";
+    } else {
+      jumbotron.style.backgroundImage = "url('img/cover_back.png')";
+    }
+  }
 }
