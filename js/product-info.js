@@ -52,7 +52,14 @@ function showProduct(product){
             quantity: 1
         };
         let cart = JSON.parse(localStorage.getItem("cart")) || [];
-        cart.push(cartItem);
+        
+        let exist = cart.find(item => item.name === cartItem.name);
+        if (exist) {
+            exist.quantity += 1;
+        } else {
+            cart.push(cartItem);
+        }
+
         localStorage.setItem("cart", JSON.stringify(cart));
         window.location = "cart.html";
     });
