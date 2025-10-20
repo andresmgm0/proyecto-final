@@ -32,7 +32,7 @@ function showProduct(product){
                             <p>Categoría: ${product.category}</p>
                             <p>Cantidad de vendidos: ${product.soldCount}</p>
                             <p>Precio: ${product.currency} ${product.cost}</p>
-                            <button class="btn add-to-cart">Agregar al carrito</button>
+                            <button id="add-to-cart" class="btn add-to-cart">Agregar al carrito</button>
                         </div>
                     </div>
                     <h2 class="mt-4" id="h2-gal">Galería de imágenes</h2>
@@ -42,6 +42,20 @@ function showProduct(product){
                     `
 
     document.getElementById("product").innerHTML = contenido;
+
+    document.getElementById("add-to-cart").addEventListener("click", () =>{
+        let cartItem = {
+            name: product.name,
+            currency: product.currency,
+            cost: product.cost,
+            image: product.images[0],
+            quantity: 1
+        };
+        let cart = JSON.parse(localStorage.getItem("cart")) || [];
+        cart.push(cartItem);
+        localStorage.setItem("cart", JSON.stringify(cart));
+        window.location = "cart.html";
+    });
 };
 
 function showComments(comments){
