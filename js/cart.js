@@ -19,13 +19,13 @@ document.addEventListener("DOMContentLoaded", () => {
       const subtotal = item.cost * qty;
 
       // Acumular totales por moneda
-      if (!totals[item.currency]){
+      if (!totals[item.currency]) {
         totals[item.currency] = subtotal;
       } else {
         totals[item.currency] += subtotal;
       }
-      
-        html += `
+
+      html += `
             <div class="card shadow-sm mb-3">
             <div class="card-body">
                 <div class="row align-items-center">
@@ -45,7 +45,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 </div>
                 <div class="col-md-2 text-end">
                     <button class="btn btn-outline-danger btn-sm remove-item" data-index="${index}">
-                    🗑️ Eliminar
+                    ${qty > 1 ? '➖ Quitar 1' : '🗑️ Eliminar'}
                     </button>
                 </div>
                 </div>
@@ -71,14 +71,34 @@ document.addEventListener("DOMContentLoaded", () => {
       });
     });
 
-    //Remover un producto
+    //Remover un producto (reducir cantidad o eliminar si es 1)
     document.querySelectorAll(".remove-item").forEach(btn => {
       btn.addEventListener("click", (e) => {
         const index = parseInt(e.target.dataset.index);
-        if (confirm(`¿Eliminar "${cart[index].name}" del carrito?`)) {
-          cart.splice(index, 1);
+        const item = cart[index];
+
+        if (item.quantity > 1) {
+          // Si hay más de 1, reducir la cantidad
+          item.quantity -= 1;
           localStorage.setItem("cart", JSON.stringify(cart));
           showCart();
+
+          // Actualizar badge del carrito
+          if (typeof updateCartBadge === 'function') {
+            updateCartBadge();
+          }
+        } else {
+          // Si es 1, eliminar completamente
+          if (confirm(`¿Eliminar "${item.name}" del carrito?`)) {
+            cart.splice(index, 1);
+            localStorage.setItem("cart", JSON.stringify(cart));
+            showCart();
+
+            // Actualizar badge del carrito
+            if (typeof updateCartBadge === 'function') {
+              updateCartBadge();
+            }
+          }
         }
       });
     });
@@ -95,6 +115,11 @@ document.addEventListener("DOMContentLoaded", () => {
     });
     localStorage.setItem("cart", JSON.stringify(cart));
     showTotals(totals);
+
+    // Actualizar badge del carrito
+    if (typeof updateCartBadge === 'function') {
+      updateCartBadge();
+    }
   }
 
   //Mostrar totales por moneda
@@ -113,6 +138,11 @@ document.addEventListener("DOMContentLoaded", () => {
       cart = [];
       localStorage.removeItem("cart");
       showCart();
+
+      // Actualizar badge del carrito
+      if (typeof updateCartBadge === 'function') {
+        updateCartBadge();
+      }
     }
   });
 

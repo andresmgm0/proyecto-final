@@ -809,6 +809,58 @@ body {
   box-shadow: 0 0 0 0.2rem rgba(102, 102, 102, 0.25) !important;
 }
 
+/* ===== BADGE DEL CARRITO ===== */
+#cart-badge {
+  font-size: 0.7rem;
+  min-width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  animation: badgePulse 0.3s ease-in-out;
+  top: -8px;
+  right: -8px;
+  z-index: 10;
+}
+
+@keyframes badgePulse {
+  0% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.2);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
+
+/* Asegurar que el enlace del carrito tenga espacio para el badge */
+.nav-link.position-relative {
+  padding-right: 15px !important;
+  margin-right: 5px;
+}
+
+/* Ajustar el navbar para que no se corte el badge */
+.navbar {
+  padding-top: 8px !important;
+  padding-bottom: 8px !important;
+}
+
+/* Asegurar que el contenedor del navbar tenga suficiente altura */
+.navbar-nav {
+  align-items: center;
+}
+
+/* Ajustar el dropdown del usuario para que no interfiera */
+.dropdown {
+  margin-left: 10px;
+}
+
 /* ===== SWITCH DESLIZABLE PERSONALIZADO ===== */
 
 /* Contenedor principal del toggle */

@@ -1,27 +1,27 @@
-document.addEventListener("DOMContentLoaded", function(e){
+document.addEventListener("DOMContentLoaded", function (e) {
     const id = localStorage.getItem("ProdID");
     const url = `${PRODUCT_INFO_URL}${id}.json`;
     const urlComments = `${PRODUCT_INFO_COMMENTS_URL}${id}.json`
-    
+
     fetch(url).then(res => res.json())
-    .then(product => {
-        //console.log(product);
-        showProduct(product);
-        showRelatedProducts(product.relatedProducts);
-    })
-    .catch(error => console.error(error));
+        .then(product => {
+            //console.log(product);
+            showProduct(product);
+            showRelatedProducts(product.relatedProducts);
+        })
+        .catch(error => console.error(error));
 
     fetch(urlComments).then(res => res.json())
-    .then(comments => {
-        console.log(comments);
-        showComments(comments);
-        newComment(comments);
-    })
-    .catch(error => console.error(error));
+        .then(comments => {
+            console.log(comments);
+            showComments(comments);
+            newComment(comments);
+        })
+        .catch(error => console.error(error));
 });
 
-function showProduct(product){
-    let contenido =`<button class="btn back-btn" onclick="window.history.back();">&larr;</button>
+function showProduct(product) {
+    let contenido = `<button class="btn back-btn" onclick="window.history.back();">&larr;</button>
                     <div class="row">
                         <div class="col-md-6">
                             <img src="${product.images[0]}" alt="${product.name}" class="product-img">
@@ -43,7 +43,7 @@ function showProduct(product){
 
     document.getElementById("product").innerHTML = contenido;
 
-    document.getElementById("add-to-cart").addEventListener("click", () =>{
+    document.getElementById("add-to-cart").addEventListener("click", () => {
         let cartItem = {
             name: product.name,
             currency: product.currency,
@@ -52,7 +52,7 @@ function showProduct(product){
             quantity: 1
         };
         let cart = JSON.parse(localStorage.getItem("cart")) || [];
-        
+
         let exist = cart.find(item => item.name === cartItem.name);
         if (exist) {
             exist.quantity += 1;
@@ -61,14 +61,20 @@ function showProduct(product){
         }
 
         localStorage.setItem("cart", JSON.stringify(cart));
+
+        // Actualizar badge del carrito
+        if (typeof updateCartBadge === 'function') {
+            updateCartBadge();
+        }
+
         window.location = "cart.html";
     });
 };
 
-function showComments(comments){
+function showComments(comments) {
     let contenido = `<h2 class="mt-4">Calificaciones</h2>`;
     comments.forEach(comment => {
-        contenido +=`<div class="card shadow-sm" id="card-comment">
+        contenido += `<div class="card shadow-sm" id="card-comment">
                         <div class="card-body">
                             <div class="d-flex justify-content-between">
                             <h6 class="mb-1 fw-bold">${comment.user}</h6>
@@ -90,7 +96,7 @@ function showRelatedProducts(related) {
 
     related.forEach(p => {
         const col = document.createElement("div");
-        
+
 
         col.innerHTML = `
             <div class="card text-center related-item" 
@@ -109,7 +115,7 @@ function showRelatedProducts(related) {
                 </div>
             </div>
         `;
-        
+
         col.onclick = () => {
             localStorage.setItem("ProdID", p.id);
             window.location = "product-info.html";
@@ -119,7 +125,7 @@ function showRelatedProducts(related) {
     });
 }
 //Funcion para agregar la fecha con el mismo formato de los demas comentarios.
-function getDate(){
+function getDate() {
     let d = new Date();
     let year = d.getFullYear();
     let month = String(d.getMonth() + 1).padStart(2, '0');
@@ -131,53 +137,53 @@ function getDate(){
     return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
 };
 
-function newComment(comments){
+function newComment(comments) {
     let stars = document.querySelectorAll(".rating .fa-star");
     let newScore = 0;
 
     //Interaccion con las estrellas.
     stars.forEach(star => {
         //Al poner el mouse arriba, se marcan.
-        star.addEventListener("mouseover", function(){
+        star.addEventListener("mouseover", function () {
             let val = parseInt(this.getAttribute("data-value"));
             highlightStars(val);
         });
         //Al hacer clic, se guarda la calificacion.
-        star.addEventListener("click", function(){
+        star.addEventListener("click", function () {
             newScore = parseInt(this.getAttribute("data-value"));
             highlightStars(newScore);
         });
         //Al quitar el mouse, deja las estrellas marcadas con la calificacion.
-        star.addEventListener("mouseout", function(){
+        star.addEventListener("mouseout", function () {
             highlightStars(newScore);
         });
     });
 
-    function highlightStars(limit){
-    stars.forEach(star => {
-        let val = parseInt(star.getAttribute("data-value"));
-        if(val <= limit){
-            star.classList.add("checked");
-        } else {
-            star.classList.remove("checked");
-        }
-    });
+    function highlightStars(limit) {
+        stars.forEach(star => {
+            let val = parseInt(star.getAttribute("data-value"));
+            if (val <= limit) {
+                star.classList.add("checked");
+            } else {
+                star.classList.remove("checked");
+            }
+        });
     }
 
     //Anadir nuevo comentario.
-    document.getElementById("comment-send").addEventListener("click", function(){
+    document.getElementById("comment-send").addEventListener("click", function () {
         let text = document.getElementById("comment-text").value.trim();
-        if(newScore === 0 || text === ""){
+        if (newScore === 0 || text === "") {
             alert("Por favor selecciona una calificación y escribe un comentario.");
             return;
         } else { //Se crea el nuevo comentario con los datos ingresado y el nombre de usuario.
             let newComment = {
-            user: `${sessionStorage.getItem("logged")}`,
-            description: text,
-            score: newScore,
-            dateTime: getDate()
+                user: `${sessionStorage.getItem("logged")}`,
+                description: text,
+                score: newScore,
+                dateTime: getDate()
             };
-            comments.push(newComment); 
+            comments.push(newComment);
             showComments(comments);
             document.getElementById("comment-text").value = "";
             newScore = 0;
@@ -185,3 +191,4 @@ function newComment(comments){
         }
     });
 };
+

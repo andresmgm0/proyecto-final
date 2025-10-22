@@ -94,11 +94,33 @@ document.addEventListener("DOMContentLoaded", function () {
 // Inicializar modo oscuro en todas las páginas
 document.addEventListener("DOMContentLoaded", function () {
   initializeDarkMode();
+  updateCartBadge(); // Actualizar badge del carrito al cargar la página
 });
 
 // Función para obtener el avatar del usuario
 function getUserAvatar() {
   return localStorage.getItem('userAvatar') || 'img/img_perfil.png';
+}
+
+// Función para actualizar el badge del carrito
+function updateCartBadge() {
+  const cart = JSON.parse(localStorage.getItem("cart")) || [];
+  let totalCount = 0;
+
+  // Sumamos todas las cantidades (por si hay más de una unidad de un mismo producto)
+  cart.forEach(item => {
+    totalCount += item.quantity || 1;
+  });
+
+  const cartBadge = document.getElementById('cart-badge');
+  if (cartBadge) {
+    if (totalCount > 0) {
+      cartBadge.textContent = totalCount;
+      cartBadge.style.display = 'inline-block';
+    } else {
+      cartBadge.style.display = 'none';
+    }
+  }
 }
 
 // Funciones para el modo oscuro
