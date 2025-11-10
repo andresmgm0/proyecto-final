@@ -123,12 +123,37 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   //Mostrar totales por moneda
-  function showTotals(totals) {
-    let html = "";
-    for (const currency in totals) {
-      html += `<h4 class="fw-bold mb-0">Total (${currency}): ${totals[currency]}</h4>`;
+  async function showTotals(totals) {
+    let totalUYU = 0;
+
+    try {
+      // Se obtiene la cotización actual del dólar
+      const response = await fetch("https://uy.dolarapi.com/v1/cotizaciones/usd");
+      const data = await response.json();
+      const dolarValue = data.venta;
+
+      // Se recorren los totales, convirtiendo USD a UYU.
+      for (const currency in totals) {
+        let amount = totals[currency];
+
+        if (currency === "USD") {
+          totalUYU += amount * dolarValue;
+        } else {
+          totalUYU += amount;
+        }
+      }
+
+      // Se muestra el total en UYU
+      totalsContainer.innerHTML = `
+        <h4 class="fw-bold mb-0">
+          Total (UYU): ${totalUYU}
+        </h4>
+        <p class="text-muted mb-0">Cotización usada: ${data.venta} UYU/USD</p>
+      `;
+    } catch (error) {
+      console.error("Error al obtener cotización del dólar:", error);
+      totalsContainer.innerHTML = `<p class="text-danger">Error al obtener cotización del dólar.</p>`;
     }
-    totalsContainer.innerHTML = html;
   }
 
   //Vaciar carrito
