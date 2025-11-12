@@ -208,7 +208,8 @@ document.addEventListener("DOMContentLoaded", async () => {
     // Validar forma de pago
     const paymentSelected = document.querySelector('input[name="payment"]:checked');
     if (!paymentSelected) {
-      valid = false;
+      alert("Selecciona un metodo de pago.");
+      return
     } else {
       const formId = paymentSelected.value + "-form";
       const inputs = document.getElementById(formId).querySelectorAll("input");
