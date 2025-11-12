@@ -1,13 +1,20 @@
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", async () => {
   const cartContainer = document.getElementById("cart-container");
-  const totalsContainer = document.getElementById("totals");
-
   let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+  let dolarValue = null;
+  try {
+    const response = await fetch("https://uy.dolarapi.com/v1/cotizaciones/usd");
+    const data = await response.json();
+    dolarValue = data.venta;
+  } catch (error) {
+    console.error("Error al obtener cotización del dólar:", error);
+  }
 
   function showCart() {
     if (cart.length === 0) {
       cartContainer.innerHTML = `<p class="text-muted">Tu carrito está vacío.</p>`;
-      totalsContainer.innerHTML = `<h4 class="fw-bold">Total: 0</h4>`;
+      updateTotals();
       return;
     }
 
@@ -106,7 +113,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   //Recalcular totales cuando cambian las cantidades
   function updateTotals() {
-    let totals = {};
+    let totals = [];
     cart.forEach(item => {
       const qty = item.quantity || 1;
       const subtotal = item.cost * qty;
@@ -122,52 +129,108 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
+
   //Mostrar totales por moneda
-  async function showTotals(totals) {
+  function showTotals(totals) {
     let totalUYU = 0;
+    
+    // Se recorren los totales, convirtiendo USD a UYU.
+    for (const currency in totals) {
+      let amount = totals[currency];
 
-    try {
-      // Se obtiene la cotización actual del dólar
-      const response = await fetch("https://uy.dolarapi.com/v1/cotizaciones/usd");
-      const data = await response.json();
-      const dolarValue = data.venta;
-
-      // Se recorren los totales, convirtiendo USD a UYU.
-      for (const currency in totals) {
-        let amount = totals[currency];
-
-        if (currency === "USD") {
-          totalUYU += amount * dolarValue;
-        } else {
-          totalUYU += amount;
-        }
+      if (currency === "USD") {
+        totalUYU += amount * dolarValue;
+      } else {
+        totalUYU += amount;
       }
-
-      // Se muestra el total en UYU
-      totalsContainer.innerHTML = `
-        <h4 class="fw-bold mb-0">
-          Total (UYU): ${totalUYU}
-        </h4>
-        <p class="text-muted mb-0">Cotización usada: ${data.venta} UYU/USD</p>
-      `;
-    } catch (error) {
-      console.error("Error al obtener cotización del dólar:", error);
-      totalsContainer.innerHTML = `<p class="text-danger">Error al obtener cotización del dólar.</p>`;
     }
+
+    const shippingRate = document.querySelector('input[name="shipping"]:checked')?.value || 0;
+    const shippingCost = totalUYU * shippingRate;
+    const total = totalUYU + shippingCost;
+
+    document.getElementById("subtotal").textContent = Math.round(totalUYU);
+    document.getElementById("shipping-cost").textContent = Math.round(shippingCost);
+    document.getElementById("total").textContent = Math.round(total);
   }
+
+  // Eventos para cambio de envío
+  document.querySelectorAll('input[name="shipping"]').forEach((radio) => {
+    radio.addEventListener("change", updateTotals);
+  });
+
+  // Eventos para cambio de pago (mostrar formularios)
+  document.querySelectorAll('input[name="payment"]').forEach((radio) => {
+    radio.addEventListener("change", () => {
+      document.getElementById("credit-form").style.display = radio.value === "credit" ? "block" : "none";
+      document.getElementById("transfer-form").style.display = radio.value === "transfer" ? "block" : "none";
+    });
+  });
 
   //Vaciar carrito
   document.getElementById("clear-cart").addEventListener("click", () => {
     if (cart.length === 0) return;
     if (confirm("¿Seguro que deseas vaciar el carrito?")) {
       cart = [];
-      localStorage.removeItem("cart");
+      localStorage.setItem("cart", JSON.stringify(cart));
       showCart();
 
       // Actualizar badge del carrito
       if (typeof updateCartBadge === 'function') {
         updateCartBadge();
       }
+    }
+  });
+
+  // Finalizar compra
+  document.getElementById("finalize").addEventListener("click", () => {
+    let valid = true;
+
+    // Validar tipo de envío
+    const shippingSelected = document.querySelector('input[name="shipping"]:checked');
+    if (!shippingSelected) {
+      alert("Selecciona un metodo de envio.");
+      return
+    }
+
+    // Validar dirección
+    const addressFields = ["departamento", "localidad", "calle", "numero", "esquina"];
+    addressFields.forEach((id) => {
+      const input = document.getElementById(id);
+      if (input.value.trim() === "") {
+        valid = false;
+        input.classList.add("is-invalid");
+      } else {
+        input.classList.remove("is-invalid");
+      }
+    });
+    
+    // Validar forma de pago
+    const paymentSelected = document.querySelector('input[name="payment"]:checked');
+    if (!paymentSelected) {
+      valid = false;
+    } else {
+      const formId = paymentSelected.value + "-form";
+      const inputs = document.getElementById(formId).querySelectorAll("input");
+      inputs.forEach((input) => {
+        if (input.value.trim() === "") {
+          valid = false;
+          input.classList.add("is-invalid");
+        } else {
+          input.classList.remove("is-invalid");
+        }
+      });
+    }
+
+    if (valid) {
+      alert("¡Compra exitosa!");
+      cart = [];
+      localStorage.setItem("cart", JSON.stringify(cart));
+      location.reload(true)
+    } else if (cart.length === 0) {
+      alert("Agrega al menos un producto al carrito para finalizar.");
+    } else {
+      alert("Por favor, completa todos los campos requeridos.")
     }
   });
 

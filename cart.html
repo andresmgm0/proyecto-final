@@ -12,7 +12,7 @@
 </head>
 
 <body>
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark p-1">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark p-1">
     <div class="container">
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
         aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -42,19 +42,114 @@
     </div>
   </nav>
   <main>
-    <div class="container">
-      <div class="container mt-4">
+    <div class="container mt-4">
+      <div class="container">
         <div id="cart-container" class="mb-4">
         </div>
         <div class="d-flex justify-content-between align-items-center">
           <button id="clear-cart" class="btn btn-outline-danger">Vaciar carrito</button>
-          <div id="totals" class="text-end">
+        </div>
+    </div>
+      <div class="accordion" id="checkoutAccordion">
+        
+        <div class="accordion-item">
+          <h2 class="accordion-header">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#shippingSection" aria-expanded="false" aria-controls="shippingSection">
+              Tipo de envío y Dirección
+            </button>
+          </h2>
+          <div id="shippingSection" class="accordion-collapse collapse" aria-labelledby="shippingHeader">
+            <div class="accordion-body">
+              <h5>Tipo de envío</h5>
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="shipping" id="premium" value="0.15">
+                <label class="form-check-label" for="premium">Premium 2 a 5 días (+15%)</label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="shipping" id="express" value="0.07">
+                <label class="form-check-label" for="express">Express 5 a 8 días (+7%)</label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="shipping" id="standard" value="0.05">
+                <label class="form-check-label" for="standard">Standard 12 a 15 días (+5%)</label>
+              </div>
+              <hr>
+              <h5>Dirección de envío</h5>
+              <form id="address-form">
+                <div class="row">
+                  <div class="col-md-6 mb-3">
+                    <input type="text" class="form-control" id="departamento" placeholder="Departamento">
+                  </div>
+                  <div class="col-md-6 mb-3">
+                    <input type="text" class="form-control" id="localidad" placeholder="Localidad">
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-6 mb-3">
+                    <input type="text" class="form-control" id="calle" placeholder="Calle">
+                  </div>
+                  <div class="col-md-3 mb-3">
+                    <input type="text" class="form-control" id="numero" placeholder="Número">
+                  </div>
+                  <div class="col-md-3 mb-3">
+                    <input type="text" class="form-control" id="esquina" placeholder="Esquina">
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+        <div class="accordion-item">
+          <h2 class="accordion-header">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#paymentSection" aria-expanded="false" aria-controls="paymentSection">
+              Forma de pago
+            </button>
+          </h2>
+          <div id="paymentSection" class="accordion-collapse collapse" aria-labelledby="paymentHeader">
+            <div class="accordion-body">
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="payment" id="credit" value="credit">
+                <label class="form-check-label" for="credit">Tarjeta de crédito</label>
+              </div>
+              <div id="credit-form" class="mt-3" style="display: none;">
+                <input type="text" class="form-control mb-2" id="card-number" placeholder="Número de tarjeta">
+                <input type="text" class="form-control mb-2" id="card-name" placeholder="Nombre del titular">
+                <input type="text" class="form-control mb-2" id="card-expiry" placeholder="Fecha de vencimiento (MM/YY)">
+                <input type="text" class="form-control mb-2" id="card-cvv" placeholder="CVV">
+              </div>
+              <div class="form-check mt-3">
+                <input class="form-check-input" type="radio" name="payment" id="transfer" value="transfer">
+                <label class="form-check-label" for="transfer">Transferencia bancaria</label>
+              </div>
+              <div id="transfer-form" class="mt-3" style="display: none;">
+                <input type="text" class="form-control mb-2" id="bank-name" placeholder="Nombre del banco">
+                <input type="text" class="form-control mb-2" id="account-number" placeholder="Número de cuenta">
+                <input type="text" class="form-control mb-2" id="account-name" placeholder="Nombre del titular">
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="accordion-item">
+          <h2 class="accordion-header">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#costsSection" aria-expanded="false" aria-controls="costsSection">
+              Costos
+            </button>
+          </h2>
+          <div id="costsSection" class="accordion-collapse collapse" aria-labelledby="costsHeader">
+            <div class="accordion-body">
+              <div id="costs">
+                <p>Subtotal: <span id="subtotal">0</span> UYU</p>
+                <p>Costo de envío: <span id="shipping-cost">0</span> UYU</p>
+                <p class="fw-bold">Total: <span id="total">0</span> UYU</p>
+              </div>
+              <button id="finalize" class="btn btn-danger mt-3">Finalizar compra</button>
+            </div>
           </div>
         </div>
       </div>
     </div>
-  </main>
-  <footer class="text-muted">
+    </main>
+    <footer class="text-muted">
     <div class="container">
       <p class="float-end">
         <a href="#">Volver arriba</a>
@@ -62,15 +157,15 @@
       <p>Este sitio forma parte de <a href="https://jovenesaprogramar.edu.uy/" target="_blank">Jovenes a Programar</a>
       </p>
     </div>
-  </footer>
-  <div id="spinner-wrapper">
-    <div class="lds-ring">
-      <div></div>
-      <div></div>
-      <div></div>
-      <div></div>
+    </footer>
+    <div id="spinner-wrapper">
+      <div class="lds-ring">
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
     </div>
-  </div>
   <script src="js/bootstrap.bundle.min.js"></script>
   <script src="js/init.js"></script>
   <script src="js/cart.js"></script>
