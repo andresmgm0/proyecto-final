@@ -1,10 +1,11 @@
-const CATEGORIES_URL = "https://japceibal.github.io/emercado-api/cats/cat.json";
-const PUBLISH_PRODUCT_URL = "https://japceibal.github.io/emercado-api/sell/publish.json";
-const PRODUCTS_URL = "https://japceibal.github.io/emercado-api/cats_products/";
-const PRODUCT_INFO_URL = "https://japceibal.github.io/emercado-api/products/";
-const PRODUCT_INFO_COMMENTS_URL = "https://japceibal.github.io/emercado-api/products_comments/";
-const CART_INFO_URL = "https://japceibal.github.io/emercado-api/user_cart/";
-const CART_BUY_URL = "https://japceibal.github.io/emercado-api/cart/buy.json";
+const BASE_URL = "http://localhost:3000";
+const CATEGORIES_URL = `${BASE_URL}/cats/cat.json`;
+const PUBLISH_PRODUCT_URL = `${BASE_URL}/sell/publish.json`;
+const PRODUCTS_URL = `${BASE_URL}/cats_products/`;
+const PRODUCT_INFO_URL = `${BASE_URL}/products/`;
+const PRODUCT_INFO_COMMENTS_URL = `${BASE_URL}/products_comments/`;
+const CART_INFO_URL = `${BASE_URL}/user_cart/`;
+const CART_BUY_URL = `${BASE_URL}/cart/buy.json`;
 const EXT_TYPE = ".json";
 
 // Spinner
@@ -19,7 +20,29 @@ let hideSpinner = function () {
 let getJSONData = function (url) {
   let result = {};
   showSpinner();
-  return fetch(url)
+
+  let token = null;
+  try {
+    token = JSON.parse(localStorage.getItem("token")) || null;
+  } catch (e) {
+    token = null;
+  }
+  
+  const currentTime = Date.now();
+
+  if (!token || !token.token || currentTime > token.expires) {
+    if (!window.location.pathname.includes("login.html")) {
+      window.location.href = "login.html";
+    }
+  } else {
+    token.expires = currentTime + 3 * 24 * 60 * 60 * 1000;
+    localStorage.setItem("token", JSON.stringify(token));
+  }
+
+
+  const fetchOptions = token.token ? { headers: { 'Authorization': `Bearer ${token.token}` } } : {};
+
+  return fetch(url, fetchOptions)
     .then(response => {
       if (response.ok) {
         return response.json();
@@ -43,19 +66,27 @@ let getJSONData = function (url) {
 
 
 document.addEventListener("DOMContentLoaded", function () {
-  let logged = sessionStorage.getItem("logged");
+  const authData = JSON.parse(localStorage.getItem("auth")) || {logged: null, expires: 0};
+  const currentTime = Date.now();
   const userSlot = document.getElementById("user-slot");
 
-  // Solo redirigir a login si no estamos ya en la página de login
-  if (!logged && !window.location.pathname.includes("login.html")) {
-    window.location.href = "login.html";
+
+  if (!authData || !authData.logged || currentTime > authData.expires) {
+    if (!window.location.pathname.includes("login.html")) {
+      window.location.href = "login.html";
+    }
+  } else {
+    authData.expires = currentTime + 3 * 24 * 60 * 60 * 1000;
+    localStorage.setItem("auth", JSON.stringify(authData));
   }
-  else if (logged) {
+
+
+  if (authData.logged) {
     userSlot.innerHTML = `
       <div class="dropdown">
         <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown">
           <img src="${getUserAvatar()}" alt="Avatar" class="user-avatar me-2">
-          ${logged}
+          ${authData.logged}
         </a>
         <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
           <li><a class="dropdown-item" href="my-profile.html"><i class="bi bi-person-circle"></i> Mi Perfil</a></li>
@@ -83,8 +114,9 @@ document.addEventListener("DOMContentLoaded", function () {
   const logoutBtn = document.getElementById("logout");
   if (logoutBtn) {
     logoutBtn.addEventListener("click", function () {
-      sessionStorage.removeItem("logged");
-      localStorage.removeItem("emailUsuario"); // opcional
+      localStorage.removeItem("auth");
+      localStorage.removeItem("token");
+      localStorage.removeItem("emailUsuario");
       window.location.href = "login.html";
     });
   }

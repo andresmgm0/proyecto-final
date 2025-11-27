@@ -4,14 +4,15 @@ let productosMostrados = [];
 document.addEventListener("DOMContentLoaded", function (e) {
   const id = localStorage.getItem("catID");
   const url = `${PRODUCTS_URL}${id}.json`;
-  fetch(url).then(res => res.json())
-    .then(data => {
-     productsArray = data.products;
-     productosMostrados = [...productsArray];
-     //console.log(productsArray);
-     showProducts(productsArray);
-    })
-    .catch(error => console.error(error));
+  getJSONData(url).then(res => {
+    if (res.status === 'ok') {
+      productsArray = res.data.products;
+      productosMostrados = [...productsArray];
+      showProducts(productsArray);
+    } else {
+      console.error('Error al obtener productos:', res.data);
+    }
+  });
 
   document.getElementById("sortAsc").addEventListener("click", () => aplicarOrden("asc"));
   document.getElementById("sortDesc").addEventListener("click", () => aplicarOrden("desc"));

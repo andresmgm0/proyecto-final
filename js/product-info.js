@@ -3,21 +3,20 @@ document.addEventListener("DOMContentLoaded", function (e) {
     const url = `${PRODUCT_INFO_URL}${id}.json`;
     const urlComments = `${PRODUCT_INFO_COMMENTS_URL}${id}.json`
 
-    fetch(url).then(res => res.json())
-        .then(product => {
-            //console.log(product);
-            showProduct(product);
-            showRelatedProducts(product.relatedProducts);
-        })
-        .catch(error => console.error(error));
+    getJSONData(url).then(res => {
+        if (res.status === 'ok') {
+            showProduct(res.data);
+            showRelatedProducts(res.data.relatedProducts);
+        }
+    });
 
-    fetch(urlComments).then(res => res.json())
-        .then(comments => {
-            console.log(comments);
-            showComments(comments);
-            newComment(comments);
-        })
-        .catch(error => console.error(error));
+    getJSONData(urlComments).then(res => {
+        if (res.status === 'ok') {
+            console.log(res.data);
+            showComments(res.data);
+            newComment(res.data);
+        }
+    });
 });
 
 function showProduct(product) {
@@ -178,7 +177,7 @@ function newComment(comments) {
             return;
         } else { //Se crea el nuevo comentario con los datos ingresado y el nombre de usuario.
             let newComment = {
-                user: `${sessionStorage.getItem("logged")}`,
+                user: `${JSON.parse(localStorage.getItem("auth")).logged}`,
                 description: text,
                 score: newScore,
                 dateTime: getDate()
