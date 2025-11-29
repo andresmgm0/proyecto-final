@@ -42,7 +42,7 @@ function cargarPerfil() {
         mostrarAlerta('Perfil cargado correctamente', 'info');
     } else {
         // Primera vez que se ingresa - precargar el email del usuario
-        const emailUsuario = JSON.parse(localStorage.getItem("auth")).logged;
+        const emailUsuario = sessionStorage.getItem('logged');
         document.getElementById('email').value = emailUsuario;
         mostrarAlerta('¡Bienvenido! Tu email ha sido precargado. Completa los demás datos.', 'info');
     }
